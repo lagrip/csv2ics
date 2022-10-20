@@ -8,7 +8,7 @@ csv2ics.py is the latest version.
 
 # Usage
 ## Requirements
-- Python 3.8+
+- [Python](https://www.python.org/downloads/) 3.8+
 
 ## Instructions
 1. Download csv2ics.py
