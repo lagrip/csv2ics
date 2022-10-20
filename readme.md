@@ -27,6 +27,8 @@ Will throw `Error while opening Calendar.csv` if not found.
 ## Required columns
 All column names must be present. This does not mean a field value is required (see table below). Leaving a required field empty may cause unexpected results.
 
+Column order is not important.
+
 Will throw `Error: Required columns missing in Calendar.csv` if a column is missing or misspelled.
 
 | Name        | Required  | id    | Remarks                                        |
