@@ -3,9 +3,9 @@ from datetime import datetime, timedelta
 import os
 
 print("CSV2ICS")
-print("Licence: MIT")
+print("Licence: GPL-3.0")
 print("17.12.2021 v1.5")
-print("===============\n")
+print("================\n")
 
 c = {}  # Dict containing all calendars
 cols = {
