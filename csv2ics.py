@@ -21,6 +21,8 @@ cols = {
 }
 totalEvents = 0
 fCounter = 0  # Counter for ics files created
+now = datetime.utcnow()
+nowical = now.strftime('%Y%m%dT%H%M%SZ')
 
 # open and read file
 print('Opening Calendar.csv...')
@@ -61,14 +63,16 @@ print("Events sorted")
 print("Creating ics files...")
 # create ics files
 for key, events in c.items():
-    f = open('ics/'+key+'.ics', "w", encoding='utf-8', newline='\n')
+    f = open('ics/'+key+'.ics', "w", encoding='utf-8')
     # file header
-    f.write('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//CSV2ICS//EXPORT\nCALSCALE:GREGORIAN\n\n')
+    f.write('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MSASSEN//CSV2ICS//EXPORT\nCALSCALE:GREGORIAN\n')
     eCounter = 0
 
     for e in events:
         # event header
         f.write('BEGIN:VEVENT\n')
+        f.write('DTSTAMP:' + nowical + '\n')
+        f.write(f'UID:CdL-{nowical}F{fCounter}E{eCounter}\n')
 
         # event data
         if e[cols["day"]] == "TRUE":
@@ -88,7 +92,7 @@ for key, events in c.items():
         f.write('DESCRIPTION:' + e[cols["dsc"]] + '\n')
         
         # event footer
-        f.write('END:VEVENT\n\n')
+        f.write('END:VEVENT\n')
         eCounter += 1
 
     # file footer
