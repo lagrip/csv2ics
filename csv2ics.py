@@ -10,7 +10,7 @@ print("22.02.2024 v1.5.2")
 print("================\n")
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--input-file", required=True, help="File in CSV format containing all events")
+parser.add_argument("-i", "--input-file", required=False, default="Calendar.csv", help="File in CSV format containing all events")
 parser.add_argument("-d", "--output-dir", required=False, default="ics", help="Where to save the .ics File")
 args = parser.parse_args()
 
