@@ -2,11 +2,17 @@ import csv
 from datetime import datetime, timedelta
 import os
 import textwrap
+import argparse
 
 print("CSV2ICS")
 print("Licence: GPL-3.0")
-print("22.02.2024 v1.5.1")
+print("22.02.2024 v1.5.2")
 print("================\n")
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-i", "--input-file", required=True, help="File in CSV format containing all events")
+parser.add_argument("-d", "--output-dir", required=False, default="ics", help="Where to save the .ics File")
+args = parser.parse_args()
 
 c = {}  # Dict containing all calendars
 cols = {
@@ -26,20 +32,20 @@ now = datetime.utcnow()
 nowical = now.strftime('%Y%m%dT%H%M%SZ')
 
 # open and read file
-print('Opening Calendar.csv...')
+print(f'Opening {args.input_file}...')
 try:
-    csvFile = open('Calendar.csv', encoding='utf-8-sig')
+    csvFile = open(f'{args.input_file}', encoding='utf-8-sig')
     data = csv.DictReader(csvFile)
 except:
-    print("Error while opening Calendar.csv")
+    print(f"Error while opening {args.input_file}")
     print("Check the file is present and has the right name\n")
     os.system('pause')
     exit()
 
-print("Calendar.csv opened")
+print(f"{args.input_file} opened")
 
 if not all (k in data.fieldnames for k in cols.values()):
-    print("Error: Required columns missing in Calendar.csv")
+    print(f"Error: Required columns missing in {args.input_file}")
     print("You have: " + ', '.join(data.fieldnames))
     print("You need: " + ', '.join(cols.values()))
     print("The order is not important\n")
@@ -64,7 +70,7 @@ print("Events sorted")
 print("Creating ics files...")
 # create ics files
 for key, events in c.items():
-    f = open('ics/'+key+'.ics', "w", encoding='utf-8')
+    f = open(f'{args.output_dir}/'+key+'.ics', "w", encoding='utf-8')
     # file header
     f.write('BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MSASSEN//CSV2ICS//EXPORT\nCALSCALE:GREGORIAN\n')
     eCounter = 0
@@ -105,9 +111,9 @@ for key, events in c.items():
     fCounter += 1
     print(f'{key}.ics created: {eCounter} event(s)')
 
-print('Closing Calendar.csv...')
+print(f'Closing {args.input_file}...')
 csvFile.close()
-print("Calendar.csv closed")
+print(f"{args.input_file} closed")
 
 print('ICS files created successfully')
 print(f'{fCounter} files created for a total of {totalEvents} event(s)')
