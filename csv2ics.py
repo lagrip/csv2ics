@@ -1,5 +1,5 @@
 import csv
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 import textwrap
 
@@ -22,7 +22,7 @@ cols = {
 }
 totalEvents = 0
 fCounter = 0  # Counter for ics files created
-now = datetime.utcnow()
+now = datetime.now(timezone.utc)
 nowical = now.strftime('%Y%m%dT%H%M%SZ')
 
 # open and read file
