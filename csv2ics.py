@@ -1,10 +1,10 @@
 import csv
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import os
 
 print("CSV2ICS")
 print("Licence: GPL-3.0")
-print("17.12.2021 v1.5")
+print("03.03.2024 v1.6")
 print("================\n")
 
 c = {}  # Dict containing all calendars
@@ -21,7 +21,7 @@ cols = {
 }
 totalEvents = 0
 fCounter = 0  # Counter for ics files created
-now = datetime.utcnow()
+now = datetime.now(timezone.utc)
 nowical = now.strftime('%Y%m%dT%H%M%SZ')
 
 # open and read file
