@@ -1,6 +1,7 @@
 import csv
 from datetime import datetime, timedelta, timezone
 import os
+import textwrap
 
 print("CSV2ICS")
 print("Licence: GPL-3.0")
@@ -89,7 +90,7 @@ for key, events in c.items():
         f.write("SUMMARY:" + e[cols["sub"]] + "\n")
         f.write("LOCATION:" + e[cols["loc"]] + "\n")
         f.write("STATUS:CONFIRMED" + "\n")
-        f.write("DESCRIPTION:" + e[cols["dsc"]] + "\n")
+        f.write("DESCRIPTION:" + "\n ".join(textwrap.wrap(e[cols["dsc"]], width=60)) + "\n")
         
         # event footer
         f.write("END:VEVENT\n")
