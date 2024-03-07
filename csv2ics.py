@@ -33,9 +33,9 @@ nowical = now.strftime("%Y%m%dT%H%M%SZ")
 
 # open and read file
 print("Opening Calendar.csv...")
-print(f'Opening {args.input_file}...')
+print(f"Opening {args.input_file}...")
 try:
-    csvFile = open(f'{args.input_file}', encoding='utf-8-sig')
+    csvFile = open(f"{args.input_file}", encoding="utf-8-sig")
     data = csv.DictReader(csvFile)
 except:
     print(f"Error while opening {args.input_file}")
@@ -47,8 +47,8 @@ print(f"{args.input_file} opened")
 
 if not all (k in data.fieldnames for k in cols.values()):
     print(f"Error: Required columns missing in {args.input_file}")
-    print("You have: " + ', '.join(data.fieldnames))
-    print("You need: " + ', '.join(cols.values()))
+    print("You have: " + ", ".join(data.fieldnames))
+    print("You need: " + ", ".join(cols.values()))
     print("The order is not important\n")
     os.system("pause")
     exit()
@@ -71,7 +71,7 @@ print("Events sorted")
 print("Creating ics files...")
 # create ics files
 for key, events in c.items():
-    f = open(f'{args.output_dir}/'+key+'.ics', "w", encoding='utf-8')
+    f = open(f"{args.output_dir}/"+key+".ics", "w", encoding="utf-8")
     # file header
     f.write("BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MSASSEN//CSV2ICS//EXPORT\nCALSCALE:GREGORIAN\n")
     eCounter = 0
