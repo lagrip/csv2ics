@@ -1,3 +1,6 @@
+# VS Code
+.vscode
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -16,3 +19,4 @@ venv.bak/
 ics/*
 *.xlsx
 *.xls
+*.csv
